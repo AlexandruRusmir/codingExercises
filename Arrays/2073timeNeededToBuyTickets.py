@@ -9,7 +9,7 @@ class Solution:
                 time_required -= 1
         return time_required
     
-    # A single pass, better:
+    # A single pass:
     def timeRequiredToBuy(self, tickets: list[int], k: int) -> int:
         time_required = 0
 
