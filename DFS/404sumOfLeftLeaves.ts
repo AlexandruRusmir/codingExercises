@@ -28,10 +28,10 @@ const sumOfLeftLeaves = (root: TreeNode | null): number => {
     if (!node) {
       return 0;
     }
-    const leftValue = node.left ? dfs(node.left) : 0;
-    const rightValue = node.right ? dfs(node.right) : 0;
 
-    return getValueForLeftNodeIfLeftLeaf(node) + leftValue + rightValue;
+    return (
+      getValueForLeftNodeIfLeftLeaf(node) + dfs(node.left) + dfs(node.right)
+    );
   };
 
   return dfs(root);
