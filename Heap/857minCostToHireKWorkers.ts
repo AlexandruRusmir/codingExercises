@@ -10,14 +10,13 @@ const mincostToHireWorkers = (
 
   const maxHeap = new MaxHeap();
   let qualitySum = 0;
-  let res = Infinity;
 
   for (let i = 0; i < k; i++) {
     maxHeap.push(workers[i].q);
     qualitySum += workers[i].q;
   }
 
-  res = workers[k - 1].ratio * qualitySum;
+  let res = workers[k - 1].ratio * qualitySum;
 
   for (let i = k; i < workers.length; i++) {
     if (maxHeap.peek() > workers[i].q) {
