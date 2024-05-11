@@ -1,4 +1,4 @@
-import { MaxHeap } from "../../dataStructures/maxHeap";
+import { MaxHeap } from "../../exercises/dataStructures/maxHeap";
 
 const mincostToHireWorkers = (
   quality: number[],
