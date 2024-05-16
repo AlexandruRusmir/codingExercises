@@ -1,15 +1,15 @@
+import { Deque } from "../../exercises/dataStructures/deque";
+
 const maximumSafenessFactor = (grid: number[][]): number => {
   const n = grid.length;
-
   const isWithinBounds = (r: number, c: number) =>
     r >= 0 && r < n && c >= 0 && c < n;
-
-  const deque: [number, number, number][] = [];
+  const deque = new Deque<[number, number, number]>();
 
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       if (grid[i][j] === 1) {
-        deque.push([i, j, 1]);
+        deque.addBack([i, j, 1]);
         grid[i][j] = 0;
       } else {
         grid[i][j] = -1;
@@ -17,8 +17,8 @@ const maximumSafenessFactor = (grid: number[][]): number => {
     }
   }
 
-  while (deque.length) {
-    const [i, j, safety] = deque.shift()!;
+  while (!deque.isEmpty()) {
+    const [i, j, safety] = deque.removeFront()!;
     const expandOptions = [
       [i + 1, j],
       [i - 1, j],
@@ -31,14 +31,14 @@ const maximumSafenessFactor = (grid: number[][]): number => {
         continue;
       }
       grid[r][c] = safety;
-      deque.push([r, c, safety + 1]);
+      deque.addBack([r, c, safety + 1]);
     }
   }
 
   let minSafety = grid[0][0];
-  deque.push([0, 0, grid[0][0]]);
-  while (deque.length) {
-    const [i, j, safety] = deque.shift()!;
+  deque.addBack([0, 0, grid[0][0]]);
+  while (!deque.isEmpty()) {
+    const [i, j, safety] = deque.removeFront()!;
     minSafety = Math.min(minSafety, safety);
     if (i === n - 1 && j === n - 1) {
       break;
@@ -56,15 +56,23 @@ const maximumSafenessFactor = (grid: number[][]): number => {
       const safety = grid[r][c];
       grid[r][c] = -1;
       if (safety < minSafety) {
-        deque.push([r, c, safety]);
+        deque.addBack([r, c, safety]);
       } else {
-        deque.unshift([r, c, safety]);
+        deque.addFront([r, c, safety]);
       }
     }
   }
 
   return minSafety;
 };
+
+console.log(
+  maximumSafenessFactor([
+    [0, 0, 1],
+    [0, 0, 0],
+    [0, 0, 0],
+  ])
+);
 
 /**
 This method utilizes two passes of BFS: one for setting the safeness levels of each cell relative to the nearest thief, and another to determine the safest path from the start to the end of the grid. Here's how it solves the problem:
