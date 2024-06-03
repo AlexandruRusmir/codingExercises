@@ -1,0 +1,2 @@
+General Resources:
+    - Getting all array subsets: DFS/78
