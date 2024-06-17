@@ -1,5 +1,5 @@
-const judgeSquareNum0 = (num: number): boolean => {
-  for (let i = 1; i < Math.sqrt(num); i++) {
+const judgeSquareSum0 = (num: number): boolean => {
+  for (let i = 0; i <= Math.sqrt(num); i++) {
     if (Number.isInteger(Math.sqrt(num - i ** 2))) {
       return true;
     }
