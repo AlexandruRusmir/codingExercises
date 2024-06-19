@@ -32,11 +32,11 @@ const minDays = (bloomDay: number[], m: number, k: number): number => {
   let left = 0,
     right = Math.max(...bloomDay);
 
-  while (left <= right) {
+  while (left < right) {
     const mid = Math.floor((left + right) / 2);
 
     if (dayHasEnoughValidBouquets(bloomDay, m, k, mid)) {
-      right = mid - 1;
+      right = mid;
     } else {
       left = mid + 1;
     }
