@@ -1,2 +1,3 @@
 General Resources:
     - Getting all array subsets: DFS/78
+    - Balancing a BST: 1382 (DFS + Binary Search)
